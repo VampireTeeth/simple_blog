@@ -9,4 +9,6 @@ urlpatterns = [
 
     url(r'^$', views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^addblog/', views.createBlog, name='addblog'),
+    url(r'^logout/', 'django.contrib.auth.views.logout', {'next_page': '/'}),
 ]
