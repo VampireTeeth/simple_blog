@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
+  </head>
+  <body>
+
+    <style type="text/css">
+
+      .centerdiv
+      {
+      width: 45%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 50px;
+      text-align: center;
+      }
+
+      .login
+      {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      width: 45%
+      }
+
+      .blog
+      {
+      margin-top: 0px;
+      width: 45%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      }
+    </style>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <ul class="nav navbar-nav">
+        {% if user != None %}
+        <a class="navbar-brand" href="#">{{user.username}}</a>
+        <li><a href="#">Add Blog</a></li>
+        {% else %}
+        <li><a data-toggle="modal" data-target="#myLogin">Login</a></li>
+        <li><button class="btn btn-success" data-toggle="modal" data-target="#myLogin">Login</button></li>
+        {% endif %}
+      </ul>
+    </nav>
+
+    <div class="page-header centerdiv">
+      <h2>Blog Articiles</h2>
+    </div>
+
+    <div class="panel panel-default blog">
+      {% for blog in blogs %}
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h3>{{blog.title}}</h3>
+          <small>{{blog.author}}</small>
+        </div>
+        <div class="panel-body">
+          {{blog.blog_content}}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+
+    <div 
+    <div class="modal fade" id="myLogin">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form method="post">
+            {% csrf_token %}
+            <div class="modal-body login">
+              <b>Username:</b>
+              <input class="form-control" name="username"/>
+              <b>password:</b>
+              <input class="form-control" name="password" type="password"/>
+            </div>
+
+            <div class="modal-footer">
+              <input type="submit" class="btn btn-success pull-left" value="Login"/>
+            </div>
+          </form>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  </body>
+</html>
